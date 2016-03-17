@@ -4,15 +4,20 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Relay • Starter Kit</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
   </head>
   <body>
-    <div id="root"></div>
+    <div class="container">
+      <div id="root"></div>
+    </div>
     <script type="text/javascript">
       // Force `fetch` polyfill to workaround Chrome not displaying request body
       // in developer tools for the native `fetch`.
       self.fetch = null;
     </script>
-    <script src="http://localhost:5000/webpack-dev-server.js"></script>
+    <script src="/js/jquery-2.2.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/webpack-dev-server.js"></script>
     <script src="app/app.js"></script>
   </body>
 </html>

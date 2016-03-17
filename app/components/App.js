@@ -3,14 +3,37 @@ import Relay from 'react-relay';
 
 class App extends React.Component {
   render() {
-    console.log(this.props)
+    // console.log(this.props)
     return (
-      this.props.user ?
-      <div>
-        <h1>User Info</h1>
-        <h3> Full Name : {this.props.user.firstName + ' ' + this.props.user.lastName} </h3>
-        <h3> Email : {this.props.user.email} </h3>
-        <h3> User ID: {this.props.user.id} </h3>
+      this.props.list && this.props.list.users ?
+      <div className="row" style={{marginTop:"40px"}}>
+        <div className="col-md-12">
+          <div className="panel panel-default">
+            <div className="panel-heading"><h4><strong>Users</strong></h4></div>
+            <table className="table table-hover table-striped">
+              <thead>
+                <tr>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Email</th>
+                  <th> </th>
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  this.props.list.users.map((user) => {
+                    return <tr key={user.id}>
+                      <td>{user.firstName}</td>
+                      <td>{user.lastName}</td>
+                      <td>{user.email}</td>
+                      <td></td>
+                    </tr>
+                  })
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
       :
       <div>
@@ -22,12 +45,14 @@ class App extends React.Component {
 
 export default Relay.createContainer(App, {
   fragments: {
-    user: () => Relay.QL`
-      fragment on User {
+    list: () => Relay.QL`
+      fragment on List {
+        users {
           id,
           firstName,
           lastName,
           email
+        }
       }
     `,
   },

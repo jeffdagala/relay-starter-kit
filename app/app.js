@@ -13,7 +13,22 @@ Relay.injectNetworkLayer(
 ReactDOM.render(
   <Relay.RootContainer
     Component={App}
-    route={new UserRoute({userID: 1})}
+    route={new UserRoute()}
+    renderLoading={
+      function() {
+        return <div>Loading...</div>;
+      }
+    }
+    renderFailure={
+      function(error, retry) {
+        return (
+            <div>
+              <p>{error.message}</p>
+              <p><button onClick={retry}>Retry?</button></p>
+            </div>
+        );
+      }
+    }
   />,
   document.getElementById('root')
 );
