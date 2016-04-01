@@ -5,7 +5,6 @@ class App extends React.Component {
   render() {
     // console.log(this.props)
     return (
-      this.props.list && this.props.list.users ?
       <div className="row" style={{marginTop:"40px"}}>
         <div className="col-md-12">
           <div className="panel panel-default">
@@ -21,23 +20,25 @@ class App extends React.Component {
               </thead>
               <tbody>
                 {
+                  this.props.list && this.props.list.users && this.props.list.users.length > 0 ?
                   this.props.list.users.map((user) => {
-                    return <tr key={user.id}>
-                      <td>{user.firstName}</td>
-                      <td>{user.lastName}</td>
-                      <td>{user.email}</td>
-                      <td></td>
-                    </tr>
-                  })
+                      return <tr key={user.id}>
+                        <td>{user.firstName}</td>
+                        <td>{user.lastName}</td>
+                        <td>{user.email}</td>
+                        <td></td>
+                      </tr>
+                    })
+                  :
+                  <tr>
+                    <td colSpan="4" style={{"textAlign":"center"}}>No users found.</td>
+                  </tr>
                 }
+
               </tbody>
             </table>
           </div>
         </div>
-      </div>
-      :
-      <div>
-        <h1>User data not found.</h1>
       </div>
     );
   }
